@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="    color: white;">
-            {{ __('Create Event') }}
+            {{ __('Edit Event') }}
         </h2>
     </x-slot>
 
@@ -56,7 +56,7 @@
                                 <div class="container-fluid px-4">
                                     <div class="row" style="margin-top: 35px;">
                                         <div class="card" style="padding: 20px; margin:30px; margin-top:0; margin-right:0; width:85%">
-                                            <h5 class="">Create New Event</h5>
+                                            <h5 class="">Edit Event</h5>
                                             <div class="card-body">
                                             <form>
                                                 <div class="form-group row">

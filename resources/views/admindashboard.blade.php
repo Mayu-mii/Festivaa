@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="    color: white;">
-            {{ __('Dashboard') }}
+            {{ __('Admin Dashboard') }}
         </h2>
     </x-slot>
 
@@ -32,20 +32,11 @@
                                         <div class="sb-sidenav-menu-heading">- General -</div>
                                         <a class="nav-link" href="{{route('dashboard')}}">
                                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                            Dashboard
+                                            Events Summary
                                         </a>
-                                        <div class="sb-sidenav-menu-heading">- Manage -</div>
-                                        <a class="nav-link" href="{{route('events')}}">
+                                        <a class="nav-link" href="{{route('admineventapproval')}}">
                                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                            My Events
-                                        </a>
-                                        <a class="nav-link" href="{{route('createevent')}}">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                            Create Event
-                                        </a>
-                                        <a class="nav-link" href="{{route('mailinglist')}}">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                            Mailing List
+                                            Event Approval
                                         </a>
                                     </div>
                                 </div>
@@ -56,18 +47,10 @@
                                         <div class="container-fluid px-4">
                                             <div class="row" style="margin-top: 35px;">
                                                 <div class="col-xl-10">
-                                                    <!-- <div class="card mb-4">
-                                                        <div class="card-header">
-                                                            <i class="fa-solid fa-bars"></i>
-                                                            EVENTS
-
-                                                            <td><a class="btn btn-primary" href="blogs" style="margin-left: 700px;">See All Events</a></td>
-                                                        </div>
-                                                    </div> -->
                                                     <div class="card mb-4">
                                                         <div class="card-header">
                                                             <i class="fa-solid fa-bars"></i>
-                                                            UPCOMING EVENTS
+                                                            ALL EVENTS
                                                         </div>
                                                         <div class="card-body">
                                                             <table class="table">
@@ -106,7 +89,7 @@
                                                     <div class="card mb-4">
                                                         <div class="card-header">
                                                             <i class="fa-solid fa-chart-bar"></i>
-                                                            EVENT STATISTICS
+                                                            EVENTS STATISTICS
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="row">
@@ -139,30 +122,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="card mb-4">
-                                                        <div class="card-header">
-                                                            <i class="fa-solid fa-calendar"></i>
-                                                            EVENT CALENDAR
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="calendar">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
-                                                    <!-- <div class="card mb-4">
-                                                        <div class="card-header">
-                                                            <i class="fa-solid fa-users"></i>
-                                                            EVENT ORGANIZERS
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item">John Doe</li>
-                                                                <li class="list-group-item">Jane Doe</li>
-                                                                <li class="list-group-item">Bob Smith</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>

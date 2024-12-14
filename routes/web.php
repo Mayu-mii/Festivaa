@@ -30,6 +30,10 @@ Route::get('/eventsgeneral', function () {
     return view('eventsgeneral');
 })->name('eventsgeneral');
 
+Route::get('/usereventdetails', function () {
+    return view('usereventdetails');
+})->name('usereventdetails');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -48,6 +52,30 @@ Route::middleware([
     Route::get('admin/profile', function () {
         return dd('admin profile page');
     })->name('adminprofile');
+
+    Route::get('/editevent', function () {
+        return view('editevent');
+    })->name('editevent');
+
+    Route::get('/organizereventdetails', function () {
+        return view('organizereventdetails');
+    })->name('organizereventdetails');
+
+    Route::get('/mailinglist', function () {
+        return view('mailinglist');
+    })->name('mailinglist');
+
+    Route::get('/admindashboard', function () {
+        return view('admindashboard');
+    })->name('admindashboard');
+
+    Route::get('/admineventapproval', function () {
+        return view('admineventapproval');
+    })->name('admineventapproval');
+
+    Route::get('/admineventdetails', function () {
+        return view('admineventdetails');
+    })->name('admineventdetails');
 
     Route::get('/blogs',[UserController::class,'index']); 
     Route::get('/blogs-create',[UserController::class,'create']);

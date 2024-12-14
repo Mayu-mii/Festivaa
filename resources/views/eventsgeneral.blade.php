@@ -82,49 +82,7 @@
                         <div class="card-body">
                             <h5 class="card-title">EVENT</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <img class="card-img-top" src="assets/img/event2.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">EVENT</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <img class="card-img-top" src="assets/img/event3.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">EVENT</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row gx-5 align-items-center">
-                    <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <img class="card-img-top" src="assets/img/event1.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">EVENT</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <img class="card-img-top" src="assets/img/event2.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">EVENT</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <img class="card-img-top" src="assets/img/event3.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">EVENT</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
+                            <a href="{{ route('usereventdetails') }}"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
                         </div>
                     </div>
                 </div>

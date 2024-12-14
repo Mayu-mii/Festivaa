@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="    color: white;">
-            {{ __('My Events') }}
+            {{ __('Event Details') }}
         </h2>
     </x-slot>
 
@@ -21,7 +21,6 @@
                     <title>Dashboard - SB Admin</title>
                     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                     <link href="styless.css" rel="stylesheet" />
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
                     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 </head>
                 <body class="sb-nav-fixed">
@@ -55,27 +54,51 @@
                         <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <div class="row" style="margin-top: 35px;">
-                                    <div class="row gx-5 align-items-center">
-                                        <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                            <img class="eventlistimage" src="assets/img/event1.png" alt="Card image cap">
+                                <h1 class="mt-4" style="color: #b23d26; font-weight: bold;">Event Details</h1>
+                                <div class="row mt-4">
+                                    <!-- Event Card -->
+                                    <div class="col-md-4 mb-4"  style="width:100%;">
+                                        <div class="card shadow-sm h-100">
+                                            <img src="assets/img/event1.png" class="card-img-top" alt="Event Image">
                                             <div class="card-body">
-                                                <h5 class="card-title">EVENT</h5>
-                                                <div style="display: flex; flex-wrap: wrap; gap: 10px; width: max-content; margin-right 10px;">
-                                                    <a href="{{route('organizereventdetails')}}" class="btn" style="background-color: #01926b; color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">SEE DETAILS</a>
-                                                    <a href="{{route('editevent')}}" class="btn btn-primary" style="border-radius: 100px;"><i class="bi bi-pencil"></i></a>
-                                                    <a href="#" class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                            <img class="eventlistimage" src="assets/img/event1.png" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">EVENT</h5>
-                                                <div style="display: flex; flex-wrap: wrap; gap: 10px; width: max-content; margin-right 10px;">
-                                                    <a href="{{route('organizereventdetails')}}" class="btn" style="background-color: #01926b; color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">SEE DETAILS</a>
-                                                    <a href="{{route('editevent')}}" class="btn btn-primary" style="border-radius: 100px;"><i class="bi bi-pencil"></i></a>
-                                                    <a href="#" class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i></a>
+                                                <h5 class="card-title text-primary" style="font-weight: bold;">Event Title</h5>
+                                                <p class="card-text">
+                                                    <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Date & Time:</strong> January 20, 2025, 5:00 PM
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Location:</strong> Conference Hall, Downtown
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Category:</strong> Workshop
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Capacity:</strong> 50 Attendees
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Ticket Price:</strong> $20
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>RSVP Deadline:</strong> January 15, 2025
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Contact:</strong> organizer@example.com
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Additional Notes:</strong> Please arrive 15 minutes early.
+                                                </p>
+                                                <p class="card-text">
+                                                    <strong>Visibility:</strong> Public
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <button class="btn btn-success btn-sm">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,6 +106,7 @@
                                 </div>
                             </div>
                         </main>
+
                         </div>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -97,3 +121,5 @@
 
     </div>
 </x-app-layout>
+
+
