@@ -67,6 +67,27 @@ class EventssController extends Controller
         return view('events', compact('events')); // Pass $events to the view
     }
 
+    public function dashboard()
+    {
+        // Fetch upcoming events (limit to 5)
+        $upcomingEvents = Event::where('event_date', '>=', now())
+        ->orderBy('event_date', 'asc')
+        ->take(5)
+        ->get()
+        ->map(function ($event) {
+            $event->event_date = \Carbon\Carbon::parse($event->event_date); // Ensure it's a Carbon object
+            return $event;
+        });
+
+        // Event Statistics
+        $totalEvents = Event::count();
+        $upcomingEventCount = Event::where('event_date', '>=', now())->count();
+        $pastEventCount = Event::where('event_date', '<', now())->count();
+    
+        return view('dashboard', compact('upcomingEvents', 'totalEvents', 'upcomingEventCount', 'pastEventCount'));
+    }
+    
+
 
     public function destroy($id)
     {

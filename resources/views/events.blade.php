@@ -81,6 +81,7 @@
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i>DELETE</button>
+                                                                
                                                                 </form>
                                                             </div>
                                                         </div>

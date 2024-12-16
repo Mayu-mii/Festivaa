@@ -101,3 +101,6 @@ Route::get('/organizereventdetails/{id}', [EventssController::class, 'show'])->n
 Route::get('/editevent/{id}', [EventssController::class, 'edit'])->name('editevent');
 Route::put('/updateevent/{id}', [EventssController::class, 'update'])->name('updateevent');
 Route::delete('/deleteevent/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
+
+Route::get('/dashboard', [EventssController::class, 'dashboard'])->name('dashboard');
+Route::put('/events/{id}/done', [EventssController::class, 'markAsDone'])->name('doneevent');
