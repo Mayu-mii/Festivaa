@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Event;
+
+class EventssController extends Controller
+{
+    // Store event data
+    public function store(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'event_date' => 'required|date|after_or_equal:today',
+            'location' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'capacity' => 'required|integer|min:1',
+            'ticket_price' => 'required|numeric|min:0',
+            'rsvp_deadline' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) use ($request) {
+                    if (strtotime($value) < strtotime($request->event_date)) {
+                        $fail('The RSVP deadline cannot be before the event date.');
+                    }
+                },
+            ],
+            'event_image' => 'nullable|image|max:2048',
+            'organizer_contact' => 'required|string|max:255',
+            'visibility' => 'required|in:Public,Private',
+            'additional_notes' => 'nullable|string',
+        ]);
+    
+        // Handle file upload
+        $fileName = null;
+        if ($request->hasFile('event_image')) {
+            $fileName = time() . '.' . $request->event_image->extension();
+            $request->event_image->storeAs('public/events', $fileName);
+        }
+    
+        // Save data to database
+        Event::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'event_date' => $request->event_date,
+            'location' => $request->location,
+            'category' => $request->category,
+            'capacity' => $request->capacity,
+            'ticket_price' => $request->ticket_price,
+            'rsvp_deadline' => $request->rsvp_deadline,
+            'event_image' => $fileName,
+            'organizer_contact' => $request->organizer_contact,
+            'visibility' => $request->visibility,
+            'additional_notes' => $request->additional_notes,
+        ]);
+    
+        // Redirect to events page with success message
+        return redirect()->route('events')->with('success', 'Event created successfully!');
+    }
+    
+
+}    

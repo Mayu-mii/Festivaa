@@ -5,6 +5,8 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EventssController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -89,3 +91,7 @@ Route::middleware([
     Route::get('/editblog/{id}', [UserController::class, 'editBlog'])->name('editBlog');
     Route::put('/updateblog/{id}', [UserController::class, 'updateBlog'])->name('updateBlog');
 });
+
+//events
+
+Route::post('/storeevent', [EventssController::class, 'store'])->name('storeevent');

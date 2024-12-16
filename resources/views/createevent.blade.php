@@ -58,35 +58,36 @@
                                         <div class="card" style="padding: 20px; margin:30px; margin-top:0; margin-right:0; width:85%">
                                             <h5 class="">Create New Event</h5>
                                             <div class="card-body">
-                                            <form>
+                                            <form method="POST" action="{{ route('storeevent') }}" enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="form-group row">
-                                                    <label for="eventTitle" class="col-sm-2 col-form-label">Event Title:</label>
+                                                    <label for="title" class="col-sm-2 col-form-label">Event Title:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="eventTitle" placeholder="Event Title">
+                                                        <input type="text" class="form-control" name="title" id="title" placeholder="Event Title" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="eventDescription" class="col-sm-2 col-form-label">Event Description:</label>
+                                                    <label for="description" class="col-sm-2 col-form-label">Event Description:</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" id="eventDescription" placeholder="Event Description"></textarea>
+                                                        <textarea class="form-control" name="description" id="description" placeholder="Event Description" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="eventDate" class="col-sm-2 col-form-label">Event Date and Time:</label>
+                                                    <label for="event_date" class="col-sm-2 col-form-label">Event Date and Time:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="datetime-local" class="form-control" id="eventDate" placeholder="Event Date and Time">
+                                                        <input type="datetime-local" class="form-control" name="event_date" id="event_date" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="eventLocation" class="col-sm-2 col-form-label">Event Location:</label>
+                                                    <label for="location" class="col-sm-2 col-form-label">Event Location:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="eventLocation" placeholder="Event Location">
+                                                        <input type="text" class="form-control" name="location" id="location" placeholder="Event Location" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="eventCategory" class="col-sm-2 col-form-label">Event Category:</label>
+                                                    <label for="category" class="col-sm-2 col-form-label">Event Category:</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="eventCategory">
+                                                        <select class="form-control" name="category" id="category" required>
                                                             <option value="Concert">Concert</option>
                                                             <option value="Workshop">Workshop</option>
                                                             <option value="Conference">Conference</option>
@@ -97,64 +98,65 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="eventCapacity" class="col-sm-2 col-form-label">Event Capacity:</label>
+                                                    <label for="capacity" class="col-sm-2 col-form-label">Event Capacity:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="eventCapacity" placeholder="Event Capacity">
+                                                        <input type="number" class="form-control" name="capacity" id="capacity" placeholder="Event Capacity" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="ticketPrice" class="col-sm-2 col-form-label">Ticket Price:</label>
+                                                    <label for="ticket_price" class="col-sm-2 col-form-label">Ticket Price:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="ticketPrice" placeholder="Ticket Price">
+                                                        <input type="number" step="0.01" class="form-control" name="ticket_price" id="ticket_price" placeholder="Ticket Price" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="rsvpDeadline" class="col-sm-2 col-form-label">RSVP Deadline:</label>
+                                                    <label for="rsvp_deadline" class="col-sm-2 col-form-label">RSVP Deadline:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="date" class="form-control" id="rsvpDeadline" placeholder="RSVP Deadline">
+                                                        <input type="date" class="form-control" name="rsvp_deadline" id="rsvp_deadline" required>
+                                                        @error('rsvp_deadline')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="event_image" class="col-sm-2 col-form-label">Event Image:</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="file" class="form-control" name="event_image" id="event_image">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="eventImage" class="col-sm-2 col-form-label">Event Image:</label>
+                                                    <label for="organizer_contact" class="col-sm-2 col-form-label">Organizer Contact:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="file" class="form-control" id="eventImage" placeholder="Event Image">
+                                                        <input type="text" class="form-control" name="organizer_contact" id="organizer_contact" placeholder="Organizer Contact" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="organizerContact" class="col-sm-2 col-form-label">Organizer Contact Information:</label>
+                                                    <label for="additional_notes" class="col-sm-2 col-form-label">Additional Notes:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="organizerContact" placeholder="Organizer Contact Information">
+                                                        <textarea class="form-control" name="additional_notes" id="additional_notes" placeholder="Additional Notes"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="additionalNotes" class="col-sm-2 col-form-label">Additional Notes:</label>
-                                                    <div class="col-sm-10">
-                                                        <textarea class="form-control" id="additionalNotes" placeholder="Additional Notes"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="eventVisibility" class="col-sm-2 col-form-label">Event Visibility:</label>
+                                                    <label class="col-sm-2 col-form-label">Event Visibility:</label>
                                                     <div class="col-sm-10">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="eventVisibility" id="public" value="Public">
-                                                            <label class="form-check-label" for="public">
-                                                                Public
-                                                            </label>
+                                                            <input class="form-check-input" type="radio" name="visibility" id="public" value="Public" required>
+                                                            <label class="form-check-label" for="public">Public</label>
                                                         </div>
                                                         <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="eventVisibility" id="private" value="Private">
-                                                                        <label class="form-check-label" for="private">
-                                                                            Private
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button type="submit" class="btn" style="background-color: #e85336;  color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">Create Event</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                            <input class="form-check-input" type="radio" name="visibility" id="private" value="Private" required>
+                                                            <label class="form-check-label" for="private">Private</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-10">
+                                                        <button type="submit" class="btn btn-success">Create Event</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                             </div>
                                         </div>
                                     </div>
