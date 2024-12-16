@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="    color: white;">
-            {{ __('Edit Event') }}
+            {{ __('Create Event') }}
         </h2>
     </x-slot>
 
@@ -56,105 +56,136 @@
                                 <div class="container-fluid px-4">
                                     <div class="row" style="margin-top: 35px;">
                                         <div class="card" style="padding: 20px; margin:30px; margin-top:0; margin-right:0; width:85%">
-                                            <h5 class="">Edit Event</h5>
+                                            <h5 class="">Create New Event</h5>
                                             <div class="card-body">
-                                            <form>
+                                            <form method="POST" action="{{ route('updateevent', $event->id) }}" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+
                                                 <div class="form-group row">
-                                                    <label for="eventTitle" class="col-sm-2 col-form-label">Event Title:</label>
+                                                    <label for="title" class="col-sm-2 col-form-label">Event Title:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="eventTitle" placeholder="Event Title">
+                                                        <input type="text" class="form-control" name="title" id="title" value="{{ $event->title }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="eventDescription" class="col-sm-2 col-form-label">Event Description:</label>
+                                                    <label for="description" class="col-sm-2 col-form-label">Event Description:</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control" id="eventDescription" placeholder="Event Description"></textarea>
+                                                        <textarea class="form-control" name="description" id="description">{{ $event->description }}</textarea>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="eventDate" class="col-sm-2 col-form-label">Event Date and Time:</label>
+                                                    <label for="event_date" class="col-sm-2 col-form-label">Event Date and Time:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="datetime-local" class="form-control" id="eventDate" placeholder="Event Date and Time">
+                                                        <input type="datetime-local" class="form-control" name="event_date" id="event_date" value="{{ $event->event_date }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="eventLocation" class="col-sm-2 col-form-label">Event Location:</label>
+                                                    <label for="location" class="col-sm-2 col-form-label">Event Location:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="eventLocation" placeholder="Event Location">
+                                                        <input type="text" class="form-control" name="location" id="location" value="{{ $event->location }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="eventCategory" class="col-sm-2 col-form-label">Event Category:</label>
+                                                    <label for="category" class="col-sm-2 col-form-label">Event Category:</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" id="eventCategory">
-                                                            <option value="Concert">Concert</option>
-                                                            <option value="Workshop">Workshop</option>
-                                                            <option value="Conference">Conference</option>
-                                                            <option value="Meetup">Meetup</option>
-                                                            <option value="Webinar">Webinar</option>
-                                                            <option value="Other">Other</option>
+                                                        <select class="form-control" name="category" id="category">
+                                                            <option value="Concert" {{ $event->category == 'Concert' ? 'selected' : '' }}>Concert</option>
+                                                            <option value="Workshop" {{ $event->category == 'Workshop' ? 'selected' : '' }}>Workshop</option>
+                                                            <option value="Conference" {{ $event->category == 'Conference' ? 'selected' : '' }}>Conference</option>
+                                                            <option value="Meetup" {{ $event->category == 'Meetup' ? 'selected' : '' }}>Meetup</option>
+                                                            <option value="Webinar" {{ $event->category == 'Webinar' ? 'selected' : '' }}>Webinar</option>
+                                                            <option value="Other" {{ $event->category == 'Other' ? 'selected' : '' }}>Other</option>
                                                         </select>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="eventCapacity" class="col-sm-2 col-form-label">Event Capacity:</label>
+                                                    <label for="capacity" class="col-sm-2 col-form-label">Event Capacity:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="eventCapacity" placeholder="Event Capacity">
+                                                        <input type="number" class="form-control" name="capacity" id="capacity" value="{{ $event->capacity }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="ticketPrice" class="col-sm-2 col-form-label">Ticket Price:</label>
+                                                    <label for="ticket_price" class="col-sm-2 col-form-label">Ticket Price:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="ticketPrice" placeholder="Ticket Price">
+                                                        <input type="number" class="form-control" name="ticket_price" id="ticket_price" value="{{ $event->ticket_price }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="rsvpDeadline" class="col-sm-2 col-form-label">RSVP Deadline:</label>
+                                                    <label for="rsvp_deadline" class="col-sm-2 col-form-label">RSVP Deadline:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="date" class="form-control" id="rsvpDeadline" placeholder="RSVP Deadline">
+                                                        <input type="date" class="form-control" name="rsvp_deadline" id="rsvp_deadline" value="{{ $event->rsvp_deadline }}">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group row">
-                                                    <label for="eventImage" class="col-sm-2 col-form-label">Event Image:</label>
+                                                    <label for="organizer_contact" class="col-sm-2 col-form-label">Organizer Contact:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="file" class="form-control" id="eventImage" placeholder="Event Image">
+                                                        <input type="text" class="form-control" name="organizer_contact" id="organizer_contact" value="{{ $event->organizer_contact }}">
                                                     </div>
                                                 </div>
+
+                                               <!-- Event Image Section -->
                                                 <div class="form-group row">
-                                                    <label for="organizerContact" class="col-sm-2 col-form-label">Organizer Contact Information:</label>
+                                                    <label for="event_image" class="col-sm-2 col-form-label">Event Image:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="organizerContact" placeholder="Organizer Contact Information">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="additionalNotes" class="col-sm-2 col-form-label">Additional Notes:</label>
-                                                    <div class="col-sm-10">
-                                                        <textarea class="form-control" id="additionalNotes" placeholder="Additional Notes"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="eventVisibility" class="col-sm-2 col-form-label">Event Visibility:</label>
-                                                    <div class="col-sm-10">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="eventVisibility" id="public" value="Public">
-                                                            <label class="form-check-label" for="public">
-                                                                Public
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="eventVisibility" id="private" value="Private">
-                                                                        <label class="form-check-label" for="private">
-                                                                            Private
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
+                                                        <!-- Display the current image if it exists -->
+                                                        @if($event->event_image)
+                                                            <div>
+                                                                <label>Current Image:</label>
+                                                                <img src="{{ asset('storage/events/' . $event->event_image) }}" alt="Current Event Image" style="width: 150px; height: auto;">
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-10">
-                                                                    <button type="submit" class="btn" style="background-color: #e85336;  color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">Create Event</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                        @endif
+                                                        <!-- Image upload input -->
+                                                        <input type="file" class="form-control" name="event_image" id="event_image">
+                                                        <small>Leave empty if you don't want to change the image</small>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group row">
+                                                <label for="additional_notes" class="col-sm-2 col-form-label">Additional Notes:</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" name="additional_notes" id="additional_notes">{{ $event->additional_notes }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                            <label for="visibility" class="col-sm-2 col-form-label">Event Visibility:</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="visibility" id="public" value="Public" {{ $event->visibility == 'Public' ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="public">
+                                                        Public
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="visibility" id="private" value="Private" {{ $event->visibility == 'Private' ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="private">
+                                                        Private
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                                <div class="form-group row">
+                                                    <div class="col-sm-10">
+                                                        <button type="submit" class="btn btn-success">Update Event</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <a href="{{ route('events') }}" class="btn btn-sucess" style="border-radius: 100px;">
+                                            <i class="fas fa-times-circle"></i> Cancel
+                                        </a>
+                        
                                             </div>
                                         </div>
                                     </div>

@@ -61,5 +61,71 @@ class EventssController extends Controller
         return redirect()->route('events')->with('success', 'Event created successfully!');
     }
     
+    public function index()
+    {
+        $events = Event::all(); // Retrieve all events from the database
+        return view('events', compact('events')); // Pass $events to the view
+    }
 
+
+    public function destroy($id)
+    {
+        // Find the event by ID
+        $event = Event::findOrFail($id);
+
+        // Delete the event
+        $event->delete();
+
+        // Redirect to the events list with a success message
+        return redirect()->route('events')->with('success', 'Event deleted successfully!');
+    }
+
+    public function show($id)
+    {
+        $event = Event::findOrFail($id); // Retrieve the event by ID
+        return view('organizereventdetails', compact('event'));
+    }
+
+
+    public function edit($id)
+    {
+        // Retrieve event details by ID
+        $event = Event::findOrFail($id);
+    
+        // Pass the event data to the edit form view
+        return view('editevent', compact('event'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+    
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'event_date' => 'required|date',
+            'location' => 'required|string|max:255',
+            'category' => 'required|string',
+            'capacity' => 'required|integer',
+            'ticket_price' => 'required|numeric',
+            'rsvp_deadline' => 'required|date',
+            'organizer_contact' => 'required|string|max:255',
+            'event_image' => 'nullable|image|max:2048',
+            'additional_notes' => 'nullable|string',
+            'visibility' => 'required|in:Public,Private', // Ensure visibility is validated
+        ]);
+    
+        // Handle image upload
+        if ($request->hasFile('event_image')) {
+            $imagePath = $request->file('event_image')->store('events', 'public');
+            $validated['event_image'] = $imagePath;
+        }
+    
+        // Update the event
+        $event->update($validated);
+    
+        return redirect()->route('events')->with('success', 'Event updated successfully!');
+    }
+    
+    
 }    

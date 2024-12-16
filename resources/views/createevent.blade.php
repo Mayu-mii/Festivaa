@@ -119,12 +119,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row">
+                                                  <div class="form-group row">
                                                     <label for="event_image" class="col-sm-2 col-form-label">Event Image:</label>
                                                     <div class="col-sm-10">
-                                                        <input type="file" class="form-control" name="event_image" id="event_image">
+                                                        <input type="file" class="form-control" name="event_image" id="event_image" accept="image/*">
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="form-group row">
                                                     <label for="organizer_contact" class="col-sm-2 col-form-label">Organizer Contact:</label>
                                                     <div class="col-sm-10">

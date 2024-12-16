@@ -113,11 +113,7 @@
                                                                         <p>20 >
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="stats-info">
-                                                                        <h6>Average Event Attendance</h6>
-                                                                        <p>500</p>
-                                                                    </div>
+                                                                
                                                                 </div>
                                                             </div>
                                                         </div>

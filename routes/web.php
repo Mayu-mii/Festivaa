@@ -95,3 +95,9 @@ Route::middleware([
 //events
 
 Route::post('/storeevent', [EventssController::class, 'store'])->name('storeevent');
+Route::get('/events', [EventssController::class, 'index'])->name('events');
+Route::delete('/events/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
+Route::get('/organizereventdetails/{id}', [EventssController::class, 'show'])->name('organizereventdetails');
+Route::get('/editevent/{id}', [EventssController::class, 'edit'])->name('editevent');
+Route::put('/updateevent/{id}', [EventssController::class, 'update'])->name('updateevent');
+Route::delete('/deleteevent/{id}', [EventssController::class, 'destroy'])->name('deleteevent');

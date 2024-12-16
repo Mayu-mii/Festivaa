@@ -21,7 +21,6 @@
                     <title>Dashboard - SB Admin</title>
                     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                     <link href="styless.css" rel="stylesheet" />
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
                     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 </head>
                 <body class="sb-nav-fixed">
@@ -52,48 +51,44 @@
                                 </div>
                             </nav>
                         </div>
-                        <div id="layoutSidenav_content">
-                        <main>
-                            <div class="container-fluid px-4">
-                                <div class="row" style="margin-top: 35px;">
-                                    <div class="row gx-5 align-items-center">
-                                        <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                            <img class="eventlistimage" src="assets/img/event1.png" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">EVENT</h5>
-                                                <div style="display: flex; flex-wrap: wrap; gap: 10px; width: max-content; margin-right 10px;">
-                                                    <a href="{{route('organizereventdetails')}}" class="btn" style="background-color: #01926b; color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">SEE DETAILS</a>
-                                                    <a href="{{route('editevent')}}" class="btn btn-primary" style="border-radius: 100px;"><i class="bi bi-pencil"></i></a>
-                                                    <a href="#" class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                            <img class="eventlistimage" src="assets/img/event1.png" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">EVENT</h5>
-                                                <div style="display: flex; flex-wrap: wrap; gap: 10px; width: max-content; margin-right 10px;">
-                                                    <a href="{{route('organizereventdetails')}}" class="btn" style="background-color: #01926b; color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">SEE DETAILS</a>
-                                                    <a href="{{route('editevent')}}" class="btn btn-primary" style="border-radius: 100px;"><i class="bi bi-pencil"></i></a>
-                                                    <a href="#" class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i></a>
-                                                </div>
+
+                            <div class="py-12">
+                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                        <div class="container-fluid px-4">
+                                            <div class="row" style="margin-top: 35px;">
+                                                @foreach($events as $event)
+                                                    <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                                    <img class="eventlistimage" 
+                                                    src="{{ $event->event_image ? asset('storage/events/' . $event->event_image) : asset('assets/img/default_event.png') }}" 
+                                                    alt="Event Image" style="width: 100%; height: auto;">
+
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ $event->title }}</h5>
+                                                            <p class="card-text">{{ $event->description }}</p>
+                                                            <p class="card-text"><strong>Date:</strong> {{ $event->event_date }}</p>
+                                                            <p class="card-text"><strong>Location:</strong> {{ $event->location }}</p>
+                                                            <div style="display: flex; flex-wrap: wrap; gap: 10px; width: max-content; margin-right: 10px;">
+                                                            <a href="{{ route('organizereventdetails', $event->id) }}" 
+                                                            class="btn" 
+                                                            style="background-color: #01926b; color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">
+                                                                SEE DETAILS
+                                                            </a>
+
+
+                                                                <a href="{{ route('editevent', $event->id) }}" class="btn btn-primary" style="border-radius: 100px;"><i class="bi bi-pencil"></i>EDIT</a>
+                                                                <form action="{{ route('deleteevent', $event->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i>DELETE</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </main>
-                        </div>
-                    </div>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-                    <script src="js/scripts.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-                    <script src="assets/demo/chart-area-demo.js"></script>
-                    <script src="assets/demo/chart-bar-demo.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-                    <script src="js/datatables-simple-demo.js"></script>
-                </body>
-            </html>
-
-    </div>
-</x-app-layout>
+                        </x-app-layout>
