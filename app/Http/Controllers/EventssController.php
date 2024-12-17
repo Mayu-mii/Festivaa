@@ -200,5 +200,15 @@ public function pastEvents()
     return view('pastevents', compact('events'));
 }
 
+// Public Events
+public function eventsgeneral()
+{
+    // Fetch all approved events
+    $events = Event::where('status', 'Approved')->get();
+
+    return view('eventsgeneral', compact('events'));
+}
+
+
     
 }    

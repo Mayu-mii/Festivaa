@@ -9,6 +9,7 @@ use App\Http\Controllers\EventssController;
 use App\Http\Controllers\AdminController;
 
 
+// Routes that are accessible without authentication
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -29,13 +30,17 @@ Route::get('/faqs', function () {
     return view('faqs');
 })->name('faqs');
 
-Route::get('/eventsgeneral', function () {
-    return view('eventsgeneral');
-})->name('eventsgeneral');
+// Publicly accessible eventsgeneral route (no authentication required)
+Route::get('/eventsgeneral', [EventssController::class, 'eventsgeneral'])->name('eventsgeneral');
+
 
 Route::get('/usereventdetails', function () {
     return view('usereventdetails');
 })->name('usereventdetails');
+
+
+
+//
 
 Route::middleware([
     'auth:sanctum',
@@ -138,4 +143,6 @@ Route::middleware('auth')->group(function () {
         }
         abort(403, 'Unauthorized Access');
     })->name('updateeventstatus');
+
+
 });

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Festiva | Home</title>
+        <title>Festiva | Events</title>
         <link rel="icon" type="image/x-icon" href="logo.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -30,30 +30,11 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('about')}}">ABOUT</a></li>
                         @if (Route::has('login'))
                                 @auth
-                                <li class="nav-item"><a
-                                        href="{{ url('/dashboard') }}"
-                                        class="nav-link"
-                                        id="loginbtn"
-                                    >
-                                        DASHBOARD
-                                    </a></li>
+                                <li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link" id="loginbtn">DASHBOARD</a></li>
                                 @else
-                                <li class="nav-item"><a
-                                        href="{{ route('login') }}"
-                                        class="nav-link"
-                                        id="loginbtn"
-                                    >
-                                        LOGIN
-                                    </a></li>
-
+                                <li class="nav-item"><a href="{{ route('login') }}" class="nav-link" id="loginbtn">LOGIN</a></li>
                                     @if (Route::has('register'))
-                                        <li class="nav-item"><a
-                                            href="{{ route('register') }}"
-                                            class="nav-link"
-                                            id="registerbtn"
-                                        >
-                                            REGISTER
-                                        </a></li>
+                                        <li class="nav-item"><a href="{{ route('register') }}" class="nav-link" id="registerbtn">REGISTER</a></li>
                                     @endif
                                 @endauth
                         @endif   
@@ -61,6 +42,7 @@
                 </div>
             </div>
         </nav>
+
         <!-- Header-->
         <header class="masthead text-center text-white" style="height:100px;">
             <div class="masthead-content">
@@ -68,23 +50,27 @@
                     <h1 class="masthead-heading mb-0">EVENTS</h1>
                 </div>
             </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
         </header>
+
         <!-- Content section 1-->
         <section id="scroll">
             <div class="container px-5" style="padding: 50px;">
                 <div class="row gx-5 align-items-center">
-                    <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <img class="card-img-top" src="assets/img/event1.png" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">EVENT</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="{{ route('usereventdetails') }}"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
+                    @foreach($events as $event)
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                <!-- Display Event Image -->
+                                <img class="card-img-top" src="{{ asset('storage/events/' . $event->event_image) }}" alt="Event Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $event->title }}</h5>
+                                    <p class="card-text">{{ Str::limit($event->description, 100) }}</p>
+                                    <p class="text-muted">Date: {{ \Carbon\Carbon::parse($event->event_date)->format('F j, Y, g:i a') }}</p>
+                                    <p class="text-muted">Location: {{ $event->location }}</p>
+                                    <a href="{{ route('organizereventdetails', $event->id) }}" class="btn btn-primary">SEE DETAILS</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -93,6 +79,7 @@
         <footer class="py-5 bg-black">
             <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p></div>
         </footer>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

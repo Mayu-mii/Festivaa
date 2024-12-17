@@ -32,6 +32,11 @@
                                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                         Mailing List
                                     </a>
+
+                                    <a class="nav-link" href="{{ route('events.past') }}">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
+                                            Past Events
+                                        </a>
                                 </div>
                             </div>
                         </nav>
