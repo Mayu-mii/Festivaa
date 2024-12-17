@@ -41,31 +41,38 @@ class EventssController extends Controller
             $request->event_image->storeAs('public/events', $fileName);
         }
     
-        // Save data to database
-        Event::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'event_date' => $request->event_date,
-            'location' => $request->location,
-            'category' => $request->category,
-            'capacity' => $request->capacity,
-            'ticket_price' => $request->ticket_price,
-            'rsvp_deadline' => $request->rsvp_deadline,
-            'event_image' => $fileName,
-            'organizer_contact' => $request->organizer_contact,
-            'visibility' => $request->visibility,
-            'additional_notes' => $request->additional_notes,
-        ]);
+        // Create a new Event instance
+        $event = new Event();
+        $event->user_id = auth()->id(); // Ensure the logged-in user's ID is saved
+        $event->title = $request->title;
+        $event->description = $request->description;
+        $event->event_date = $request->event_date;
+        $event->location = $request->location;
+        $event->category = $request->category;
+        $event->capacity = $request->capacity;
+        $event->ticket_price = $request->ticket_price;
+        $event->rsvp_deadline = $request->rsvp_deadline;
+        $event->organizer_contact = $request->organizer_contact;
+        $event->visibility = $request->visibility;
+        $event->additional_notes = $request->additional_notes;
+        $event->event_image = $fileName;
+
     
-        // Redirect to events page with success message
+        // Save the event
+        $event->save();
+    
+        // Redirect to events page
         return redirect()->route('events')->with('success', 'Event created successfully!');
     }
     
+    
     public function index()
     {
-        $events = Event::all(); // Retrieve all events from the database
-        return view('events', compact('events')); // Pass $events to the view
+        // Retrieve only the events that belong to the authenticated user
+        $events = Event::where('user_id', auth()->id())->get();
+        return view('events', compact('events'));
     }
+
 
     public function dashboard()
     {

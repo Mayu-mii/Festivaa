@@ -45,9 +45,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/events', function () {
-        return view('events');
-    })->name('events');
+  
     Route::get('/createevent', function () {
         return view('createevent');
     })->name('createevent');
@@ -94,17 +92,18 @@ Route::middleware([
 });
 
 //events
+Route::middleware(['auth', UserMiddleware::class])->group(function () {
+    Route::get('/events', [EventssController::class, 'index'])->name('events');
+    Route::post('/storeevent', [EventssController::class, 'store'])->name('storeevent');
+    Route::delete('/events/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
+    Route::get('/organizereventdetails/{id}', [EventssController::class, 'show'])->name('organizereventdetails');
+    Route::get('/editevent/{id}', [EventssController::class, 'edit'])->name('editevent');
+    Route::put('/updateevent/{id}', [EventssController::class, 'update'])->name('updateevent');
+    Route::delete('/deleteevent/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
 
-Route::post('/storeevent', [EventssController::class, 'store'])->name('storeevent');
-Route::get('/events', [EventssController::class, 'index'])->name('events');
-Route::delete('/events/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
-Route::get('/organizereventdetails/{id}', [EventssController::class, 'show'])->name('organizereventdetails');
-Route::get('/editevent/{id}', [EventssController::class, 'edit'])->name('editevent');
-Route::put('/updateevent/{id}', [EventssController::class, 'update'])->name('updateevent');
-Route::delete('/deleteevent/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
-
-Route::get('/dashboard', [EventssController::class, 'dashboard'])->name('dashboard');
-Route::put('/events/{id}/done', [EventssController::class, 'markAsDone'])->name('doneevent');
+    Route::get('/dashboard', [EventssController::class, 'dashboard'])->name('dashboard');
+    Route::put('/events/{id}/done', [EventssController::class, 'markAsDone'])->name('doneevent');
+});
 
 //admin
 

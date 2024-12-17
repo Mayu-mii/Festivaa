@@ -16,10 +16,11 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role == 'user') {
-        return $next($request);
+    if (Auth::check() && Auth::user()->role == 'user') {
+            return $next($request);
         }
-
+        
         return redirect('/')->with('alert', 'You do not have admin access');
-    }
+        
+}
 }

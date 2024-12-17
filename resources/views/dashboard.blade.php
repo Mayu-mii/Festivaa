@@ -70,6 +70,7 @@
                                                                 <th scope="col">Event Title</th>
                                                                 <th scope="col">Event Date</th>
                                                                 <th scope="col">Location</th>
+                                                                <th scope="col">Status</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -87,7 +88,46 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
 
+                                    
+                                    <!-- Pending Events Card (Moved to the bottom) -->
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    <i class="fa-solid fa-chart-bar"></i>
+                                                    Pending Events
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Event Title</th>
+                                                                <th scope="col">Event Date</th>
+                                                                <th scope="col">Location</th>
+                                                                <th scope="col">Status</th>
+                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($upcomingEvents as $event)
+                                                                <tr>
+                                                                    <th scope="row">{{ $loop->iteration }}</th>
+                                                                    <td>{{ $event->title }}</td>
+                                                                    <td>{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d H:i') }}</td>
+                                                                    <td>{{ $event->location }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                               
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                      
                                     <!-- Event Statistics Card (Moved to the bottom) -->
                                     <div class="row">
                                         <div class="col-xl-12">
@@ -114,6 +154,12 @@
                                                             <div class="stats-info">
                                                                 <h6>Past Events</h6>
                                                                 <p>{{ $pastEventCount }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="stats-info">
+                                                                <h6>Pending Events</h6>
+                                                                <p>3</p>
                                                             </div>
                                                         </div>
                                                     </div>

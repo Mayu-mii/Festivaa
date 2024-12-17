@@ -21,5 +21,6 @@ class Event extends Model
         'organizer_contact',
         'visibility',
         'additional_notes',
+        'user_id',
     ];
 }
