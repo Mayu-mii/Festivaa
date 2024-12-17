@@ -60,6 +60,7 @@ class EventssController extends Controller
     
         // Save the event
         $event->save();
+        $event->status = 'Done';
     
         // Redirect to events page
         return redirect()->route('events')->with('success', 'Event created successfully!');
@@ -76,22 +77,43 @@ class EventssController extends Controller
 
     public function dashboard()
     {
-        // Fetch upcoming events (limit to 5)
-        $upcomingEvents = Event::where('event_date', '>=', now())
-        ->orderBy('event_date', 'asc')
-        ->take(5)
-        ->get()
-        ->map(function ($event) {
-            $event->event_date = \Carbon\Carbon::parse($event->event_date); // Ensure it's a Carbon object
-            return $event;
-        });
-
-        // Event Statistics
-        $totalEvents = Event::count();
-        $upcomingEventCount = Event::where('event_date', '>=', now())->count();
-        $pastEventCount = Event::where('event_date', '<', now())->count();
+        $userId = auth()->id(); // Get the logged-in user's ID
     
-        return view('dashboard', compact('upcomingEvents', 'totalEvents', 'upcomingEventCount', 'pastEventCount'));
+        // Fetch approved upcoming events
+        $upcomingEvents = Event::where('status', 'Approved')
+            ->where('user_id', $userId)
+            ->whereDate('event_date', '>=', now()->toDateString())
+            ->orderBy('event_date', 'asc')
+            ->get();
+    
+        // Fetch pending events (only for the authenticated user)
+        $pendingEvents = Event::where('status', 'Pending')
+            ->where('user_id', $userId)
+            ->whereDate('event_date', '>=', now()->toDateString())
+            ->orderBy('event_date', 'asc')
+            ->get();
+    
+        // Event statistics
+        $totalEvents = Event::where('user_id', $userId)->count();
+        $upcomingEventCount = Event::where('status', 'Approved')
+            ->where('user_id', $userId)
+            ->whereDate('event_date', '>=', now()->toDateString())
+            ->count();
+        $pendingEventCount = Event::where('status', 'Pending')
+            ->where('user_id', $userId)
+            ->count();
+        $pastEventCount = Event::where('status', 'Done')
+            ->where('user_id', $userId)
+            ->count();
+    
+        return view('dashboard', compact(
+            'upcomingEvents',
+            'pendingEvents',
+            'totalEvents',
+            'upcomingEventCount',
+            'pendingEventCount',
+            'pastEventCount'
+        ));
     }
     
 
@@ -155,5 +177,28 @@ class EventssController extends Controller
         return redirect()->route('events')->with('success', 'Event updated successfully!');
     }
     
+
+    //mark as done
+    public function markAsDone($id)
+{
+    // Find the event by ID
+    $event = Event::findOrFail($id);
+
+    // Mark the event as "Done"
+    $event->status = 'Done';
+    $event->save();
+
+    // Redirect back with a success message
+    return redirect()->route('events')->with('success', 'Event marked as done!');
+}
+
+public function pastEvents()
+{
+    // Retrieve all "Done" events
+    $events = Event::where('status', 'Done')->get();
+
+    return view('pastevents', compact('events'));
+}
+
     
 }    

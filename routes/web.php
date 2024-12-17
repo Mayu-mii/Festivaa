@@ -102,7 +102,10 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
     Route::delete('/deleteevent/{id}', [EventssController::class, 'destroy'])->name('deleteevent');
 
     Route::get('/dashboard', [EventssController::class, 'dashboard'])->name('dashboard');
-    Route::put('/events/{id}/done', [EventssController::class, 'markAsDone'])->name('doneevent');
+    Route::patch('/events/{id}/done', [EventssController::class, 'markAsDone'])->name('events.done');
+    Route::get('/events/past', [EventssController::class, 'pastEvents'])->name('events.past');
+
+
 });
 
 //admin

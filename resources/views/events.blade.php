@@ -47,6 +47,12 @@
                                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                             Mailing List
                                         </a>
+
+                                        <a class="nav-link" href="{{ route('events.past') }}">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
+                                            Past Events
+                                        </a>
+
                                     </div>
                                 </div>
                             </nav>
@@ -56,38 +62,48 @@
                                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                         <div class="container-fluid px-4">
-                                            <div class="row" style="margin-top: 35px;">
-                                                @foreach($events as $event)
+                                        <div class="row" style="margin-top: 35px;">
+                                            @foreach($events as $event)
+                                                @if($event->status !== 'Done') <!-- Exclude "Done" events -->
                                                     <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                                    <img class="eventlistimage" 
-                                                    src="{{ $event->event_image ? asset('storage/events/' . $event->event_image) : asset('assets/img/default_event.png') }}" 
-                                                    alt="Event Image" style="width: 100%; height: auto;">
+                                                        <img class="eventlistimage" 
+                                                            src="{{ $event->event_image ? asset('storage/events/' . $event->event_image) : asset('assets/img/default_event.png') }}" 
+                                                            alt="Event Image" style="width: 100%; height: auto;">
 
                                                         <div class="card-body">
                                                             <h5 class="card-title">{{ $event->title }}</h5>
                                                             <p class="card-text">{{ $event->description }}</p>
                                                             <p class="card-text"><strong>Date:</strong> {{ $event->event_date }}</p>
                                                             <p class="card-text"><strong>Location:</strong> {{ $event->location }}</p>
-                                                            <div style="display: flex; flex-wrap: wrap; gap: 10px; width: max-content; margin-right: 10px;">
-                                                            <a href="{{ route('organizereventdetails', $event->id) }}" 
-                                                            class="btn" 
-                                                            style="background-color: #01926b; color: white; border-radius: 100px; padding-left: 25px; padding-right: 25px;">
-                                                                SEE DETAILS
-                                                            </a>
+                                                            <p class="card-text"><strong>Status:</strong> 
+                                                                <span style="font-weight: bold; color: #ffc107;">{{ $event->status }}</span>
+                                                            </p>
 
+                                                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                                                <a href="{{ route('organizereventdetails', $event->id) }}" class="btn btn-success" style="border-radius: 100px;">SEE DETAILS</a>
+                                                                <a href="{{ route('editevent', $event->id) }}" class="btn btn-primary" style="border-radius: 100px;">EDIT</a>
+                                                                
+                                                                <!-- Mark as Done Button -->
+                                                                <form action="{{ route('events.done', $event->id) }}" method="POST" onsubmit="return confirm('Mark this event as done?');">
+                                                                    @csrf
+                                                                    @method('PATCH')
+                                                                    <button class="btn btn-warning" style="border-radius: 100px;">DONE</button>
+                                                                </form>
 
-                                                                <a href="{{ route('editevent', $event->id) }}" class="btn btn-primary" style="border-radius: 100px;"><i class="bi bi-pencil"></i>EDIT</a>
+                                                                <!-- Delete Button -->
                                                                 <form action="{{ route('deleteevent', $event->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button class="btn btn-danger" style="border-radius: 100px;"><i class="bi bi-trash"></i>DELETE</button>
-                                                                
+                                                                    <button class="btn btn-danger" style="border-radius: 100px;">DELETE</button>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endforeach
-                                            </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+
+
                                         </div>
                                     </div>
                                 </div>

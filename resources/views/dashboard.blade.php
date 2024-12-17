@@ -74,14 +74,16 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach($upcomingEvents as $event)
-                                                                <tr>
-                                                                    <th scope="row">{{ $loop->iteration }}</th>
-                                                                    <td>{{ $event->title }}</td>
-                                                                    <td>{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d H:i') }}</td>
-                                                                    <td>{{ $event->location }}</td>
-                                                                </tr>
-                                                            @endforeach
+                                                        @foreach($upcomingEvents as $event)
+                                                            <tr>
+                                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                                <td>{{ $event->title }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d H:i') }}</td>
+                                                                <td>{{ $event->location }}</td>
+                                                                <td><span class="badge bg-success">{{ $event->status }}</span></td>
+                                                            </tr>
+                                                        @endforeach
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -113,14 +115,16 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach($upcomingEvents as $event)
-                                                                <tr>
-                                                                    <th scope="row">{{ $loop->iteration }}</th>
-                                                                    <td>{{ $event->title }}</td>
-                                                                    <td>{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d H:i') }}</td>
-                                                                    <td>{{ $event->location }}</td>
-                                                                </tr>
-                                                            @endforeach
+                                                        @foreach($pendingEvents as $event)
+                                                            <tr>
+                                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                                <td>{{ $event->title }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d H:i') }}</td>
+                                                                <td>{{ $event->location }}</td>
+                                                                <td><span class="badge bg-warning">{{ $event->status }}</span></td>
+                                                            </tr>
+                                                        @endforeach
+
                                                         </tbody>
                                                     </table>
                                                
@@ -138,30 +142,31 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="stats-info">
-                                                                <h6>Total Events</h6>
-                                                                <p>{{ $totalEvents }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="stats-info">
-                                                                <h6>Upcoming Events</h6>
-                                                                <p>{{ $upcomingEventCount }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="stats-info">
-                                                                <h6>Past Events</h6>
-                                                                <p>{{ $pastEventCount }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="stats-info">
-                                                                <h6>Pending Events</h6>
-                                                                <p>3</p>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Total Events</h6>
+                                                        <p>{{ $totalEvents }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Upcoming Events</h6>
+                                                        <p>{{ $upcomingEventCount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Pending Events</h6>
+                                                        <p>{{ $pendingEventCount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Past Events</h6>
+                                                        <p>{{ $pastEventCount }}</p>
+                                                    </div>
+                                                </div>
+
                                                     </div>
                                                 </div>
                                             </div>
