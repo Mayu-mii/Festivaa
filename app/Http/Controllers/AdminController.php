@@ -31,7 +31,7 @@ class AdminController extends Controller
     
         return redirect()->back()->with('error', 'Invalid status provided.');
     }
-    public function dashboard()
+    public function admindashboard()
 {
     $events = Event::all(); // Fetch all events
     $totalEvents = Event::count();

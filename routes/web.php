@@ -108,8 +108,32 @@ Route::put('/events/{id}/done', [EventssController::class, 'markAsDone'])->name(
 
 //admin
 
-Route::get('/admineventapproval', [AdminController::class, 'admineventapproval'])->name('admineventapproval');
-Route::get('/admineventdetails/{id}', [AdminController::class, 'showEventDetails'])->name('admineventdetails');
-Route::post('/admineventdetails/{id}/{status}', [AdminController::class, 'updateStatus'])->name('updateeventstatus');
-Route::get('/admindashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/admindashboard', function () {
+        if (Auth::user()->role === 'admin') {
+            return app()->make(AdminController::class)->admindashboard();
+        }
+        abort(403, 'Unauthorized Access');
+    })->name('admindashboard');
 
+    Route::get('/admineventapproval', function () {
+        if (Auth::user()->role === 'admin') {
+            return app()->make(AdminController::class)->admineventapproval();
+        }
+        abort(403, 'Unauthorized Access');
+    })->name('admineventapproval');
+
+    Route::get('/admineventdetails/{id}', function ($id) {
+        if (Auth::user()->role === 'admin') {
+            return app()->make(AdminController::class)->showEventDetails($id);
+        }
+        abort(403, 'Unauthorized Access');
+    })->name('admineventdetails');
+
+    Route::post('/admineventdetails/{id}/{status}', function ($id, $status) {
+        if (Auth::user()->role === 'admin') {
+            return app()->make(AdminController::class)->updateStatus($id, $status);
+        }
+        abort(403, 'Unauthorized Access');
+    })->name('updateeventstatus');
+});

@@ -30,7 +30,7 @@
                                 <div class="sb-sidenav-menu" style="background-color: #b23d26;">
                                     <div class="nav">
                                         <div class="sb-sidenav-menu-heading">- General -</div>
-                                        <a class="nav-link" href="{{route('dashboard')}}">
+                                        <a class="nav-link" href="{{route('admindashboard')}}">
                                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                             Events Summary
                                         </a>

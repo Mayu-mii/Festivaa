@@ -38,7 +38,7 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a href="{{ url('/dashboard') }}" class="nav-link" id="loginbtn">
+                                    <a href="{{ url(path: '/dashboard') }}" class="nav-link" id="loginbtn">
                                         DASHBOARD
                                     </a>
                                 </li>
