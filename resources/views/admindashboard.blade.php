@@ -66,21 +66,18 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <th scope="row">1</th>
-                                                                        <td>Summer Music Festival</td>
-                                                                        <td>2023-06-15 12:00:00</td>
-                                                                        <td>123 Main Street, City, Country</td>
-                                                                        <td>Concert</td>
-                                                                        <td>Pending</td>
+                                                                    @foreach ($events as $index => $event)
+                                                                        <tr>
+                                                                            <th>{{ $index + 1 }}</th>
+                                                                            <td>{{ $event->title }}</td>
+                                                                            <td>{{ \Carbon\Carbon::parse($event->event_date)->format('F d, Y - h:i A') }}</td>
+                                                                            <td>{{ $event->location }}</td>
+                                                                            <td>{{ $event->category }}</td>
+                                                                            <td>{{ $event->status ?? 'Pending' }}</td>
+                                                                        </tr>
+                                                                    @endforeach
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th scope="row">2</th>
-                                                                        <td>Yoga Workshop</td>
-                                                                        <td>2023-07-22 09:00:00</td>
-                                                                        <td>456 Yoga Studio, City, Country</td>
-                                                                        <td>Workshop</td>
-                                                                        <td>Approved</td>
-                                                                    </tr>
+
                                                                     <!-- Add more data rows as needed -->
                                                                 </tbody>
                                                             </table>
@@ -96,22 +93,22 @@
                                                                 <div class="col-md-6">
                                                                     <div class="stats-info">
                                                                         <h6>Total Events</h6>
-                                                                        <p>25</p>
-                                                                    </div>
+                                                                        <p>{{ $totalEvents }}</p>
+                                                                        </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="stats-info">
                                                                         <h6>Upcoming Events</h6>
-                                                                        <p>5</p>
-                                                                    </div>
+                                                                        <p>{{ $upcomingEvents }}</p>
+                                                                        </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="stats-info">
                                                                         <h6>Past Events</h6>
-                                                                        <p>20 >
-                                                                    </div>
+                                                                        <p>{{ $pastEvents }}</p>
+                                                                        </div>
                                                                 </div>
                                                                 
                                                                 </div>

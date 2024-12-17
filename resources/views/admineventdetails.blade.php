@@ -1,113 +1,84 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="    color: white;">
-            {{ __('Admin Dashboard') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight" style="color: white;">
+            {{ __('Event Details') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+                <h1 class="text-center text-primary fw-bold">{{ $event->title }}</h1>
+                <div class="row mt-4">
+                    <!-- Event Image -->
+                    <div class="col-md-4 mb-4">
+                        <img src="{{ $event->event_image ? asset('storage/events/' . $event->event_image) : asset('assets/img/default_event.png') }}" 
+                             class="img-fluid rounded shadow" alt="Event Image">
+                    </div>
+                    <!-- Event Details -->
+                    <div class="col-md-8">
+                        <p><strong>Description:</strong> {{ $event->description }}</p>
+                        <p><strong>Date & Time:</strong> {{ \Carbon\Carbon::parse($event->event_date)->format('F d, Y - h:i A') }}</p>
+                        <p><strong>Location:</strong> {{ $event->location }}</p>
+                        <p><strong>Category:</strong> {{ $event->category }}</p>
+                        <p><strong>Capacity:</strong> {{ $event->capacity }} Attendees</p>
+                        <p><strong>Ticket Price:</strong> ${{ number_format($event->ticket_price, 2) }}</p>
+                        <p><strong>RSVP Deadline:</strong> {{ \Carbon\Carbon::parse($event->rsvp_deadline)->format('F d, Y') }}</p>
+                        <p><strong>Contact:</strong> {{ $event->organizer_contact }}</p>
+                        <p><strong>Additional Notes:</strong> {{ $event->additional_notes ?? 'None' }}</p>
+                        <p><strong>Visibility:</strong> {{ $event->visibility }}</p>
+                        <!-- Set Status Dropdown -->
+                        <div class="mt-3">
+                <strong>Set Status:</strong>
+                <div class="dropdown d-inline-block ms-2">
+                    <!-- Button reflects the current status -->
+                    <button class="btn {{ $event->status === 'Approved' ? 'btn-success' : ($event->status === 'Rejected' ? 'btn-danger' : 'btn-outline-secondary') }} dropdown-toggle"
+                            type="button" id="setStatusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ $event->status ?? 'Set Status' }}
+                    </button>
+
+        <!-- Dropdown Menu -->
+        <ul class="dropdown-menu" aria-labelledby="setStatusDropdown">
+            <!-- Approve Option -->
+            <li>
+                <form action="{{ route('updateeventstatus', ['id' => $event->id, 'status' => 'Approved']) }}" method="POST" onsubmit="return confirmAction('approve');">
+                    @csrf
+                    <button class="dropdown-item text-success" type="submit">
+                        <i class="fas fa-check-circle"></i> Approve
+                    </button>
+                </form>
+            </li>
+            <!-- Reject Option -->
+            <li>
+                <form action="{{ route('updateeventstatus', ['id' => $event->id, 'status' => 'Rejected']) }}" method="POST" onsubmit="return confirmAction('reject');">
+                    @csrf
+                    <button class="dropdown-item text-danger" type="submit">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+            </div>
+
+         </div>
+                </div>
+                <!-- Back Button -->
+                <div class="text-center mt-4">
+                    <a href="{{ route('admineventapproval') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Event Approval
+                    </a>
+                </div>
             </div>
         </div>
-        <!DOCTYPE html>
-            <html lang="en">
-                <head>
-                    <meta charset="utf-8" />
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                    <meta name="description" content="" />
-                    <meta name="author" content="" />
-                    <title>Dashboard - SB Admin</title>
-                    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-                    <link href="styless.css" rel="stylesheet" />
-                    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-                </head>
-                <body class="sb-nav-fixed">
-                    <div id="layoutSidenav">
-                        <div id="layoutSidenav_nav">
-                            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                                <div class="sb-sidenav-menu" style="background-color: #b23d26;">
-                                    <div class="nav">
-                                        <div class="sb-sidenav-menu-heading">- General -</div>
-                                        <a class="nav-link" href="{{route('dashboard')}}">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                            Events Summary
-                                        </a>
-                                        <a class="nav-link" href="{{route('admineventapproval')}}">
-                                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                            Event Approval
-                                        </a>
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
-                        <div id="layoutSidenav_content">
-                        <main>
-                            <div class="container-fluid px-4">
-                                <h1 class="mt-4" style="color: #b23d26; font-weight: bold;">Event Details</h1>
-                                <div class="row mt-4">
-                                    <!-- Event Card -->
-                                    <div class="col-md-4 mb-4"  style="width:100%;">
-                                        <div class="card shadow-sm h-100">
-                                            <img src="assets/img/event1.png" class="card-img-top" alt="Event Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title text-primary" style="font-weight: bold;">Event Title</h5>
-                                                <p class="card-text">
-                                                    <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Date & Time:</strong> January 20, 2025, 5:00 PM
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Location:</strong> Conference Hall, Downtown
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Category:</strong> Workshop
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Capacity:</strong> 50 Attendees
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Ticket Price:</strong> $20
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>RSVP Deadline:</strong> January 15, 2025
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Contact:</strong> organizer@example.com
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Additional Notes:</strong> Please arrive 15 minutes early.
-                                                </p>
-                                                <p class="card-text">
-                                                    <strong>Visibility:</strong> Public
-                                                </p>
-                                                <div class="d-flex justify-content-between">
-                                                    <button class="btn btn-success btn-sm">
-                                                        <i class="fas fa-edit"></i> Set Event Status
-                                                    </button>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </main>
-                        </div>
-                    </div>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-                    <script src="js/scripts.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-                    <script src="assets/demo/chart-area-demo.js"></script>
-                    <script src="assets/demo/chart-bar-demo.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-                    <script src="js/datatables-simple-demo.js"></script>
-                </body>
-            </html>
-
     </div>
 </x-app-layout>
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript for Confirmation Prompt -->
+<script>
+    function confirmAction(action) {
+        let message = `Are you sure you want to ${action} this event?`;
+        return confirm(message);
+    }
+</script>

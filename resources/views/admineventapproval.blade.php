@@ -30,7 +30,7 @@
                                 <div class="sb-sidenav-menu" style="background-color: #b23d26;">
                                     <div class="nav">
                                         <div class="sb-sidenav-menu-heading">- General -</div>
-                                        <a class="nav-link" href="{{route('dashboard')}}">
+                                        <a class="nav-link" href="{{route('admindashboard')}}">
                                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                             Events Summary
                                         </a>
@@ -76,58 +76,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Example Row -->
-                            <tr data-status="Pending">
-                                <td>EVT001</td>
-                                <td>Music Festival 2024</td>
-                                <td>John Doe</td>
-                                <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                <td class="text-center">
-                                    <!-- Check Details Button -->
-                                    <!-- <a href="{{route('admineventdetails')}}"> -->
-                                    <a href="{{route('admineventdetails')}}" class="btn btn-outline-dark btn-sm" title="Check Details">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
+    @foreach($events as $event)
+        <tr data-status="{{ $event->status ?? 'Pending' }}">
+            <td>{{ $event->id }}</td>
+            <td>{{ $event->title }}</td>
+            <td>{{ $event->organizer_contact }}</td>
+            <td>
+                @if($event->status == 'Approved')
+                    <span class="badge bg-success">Approved</span>
+                @elseif($event->status == 'Rejected')
+                    <span class="badge bg-danger">Rejected</span>
+                @else
+                    <span class="badge bg-warning text-dark">Pending</span>
+                @endif
+            </td>
+<td class="text-center">
+    <!-- Check Details Button -->
+    <a href="{{ route('admineventdetails', $event->id) }}" class="btn btn-outline-dark btn-sm" title="Check Details">
+        <i class="fas fa-info-circle"></i> View Event
+    </a>
+</td>
 
-                                    <!-- Set Status Button -->
-                                    <a class="btn btn-outline-primary btn-sm" title="Set Status">
-                                        <i class="fas fa-edit"></i>
-</a>
-                                </td>
-                            </tr>
-                            <tr data-status="Approved">
-                                <td>EVT002</td>
-                                <td>Art Workshop</td>
-                                <td>Jane Smith</td>
-                                <td><span class="badge bg-success">Approved</span></td>
-                                <td class="text-center">
-                                    <!-- Check Details Button -->      
-                                    <a href="{{route('admineventdetails')}}" class="btn btn-outline-dark btn-sm" title="Check Details">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
-                                    <!-- Set Status Button -->
-                                    <a class="btn btn-outline-primary btn-sm" title="Set Status">
-                                        <i class="fas fa-edit"></i>
-</a>
-                                </td>
-                            </tr>
-                            <tr data-status="Rejected">
-                                <td>EVT003</td>
-                                <td>Food Expo 2024</td>
-                                <td>Emily White</td>
-                                <td><span class="badge bg-danger">Rejected</span></td>
-                                <td class="text-center">
-                                    <!-- Check Details Button -->
-                                    <a href="{{route('admineventdetails')}}" class="btn btn-outline-dark btn-sm" title="Check Details">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
-                                    <!-- Set Status Button -->
-                                    <a class="btn btn-outline-primary btn-sm" title="Set Status">
-                                        <i class="fas fa-edit"></i>
-</a>
-                                </td>
-                            </tr>
-                        </tbody>
+        </tr>
+    @endforeach
+</tbody>
+
                     </table>
                 </div>
             </div>

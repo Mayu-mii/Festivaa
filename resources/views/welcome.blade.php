@@ -29,34 +29,36 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('faqs')}}">FAQs</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('about')}}">ABOUT</a></li>
                         @if (Route::has('login'))
-                                @auth
-                                <li class="nav-item"><a
-                                        href="{{ url('/dashboard') }}"
-                                        class="nav-link"
-                                        id="loginbtn"
-                                    >
+                        @auth
+                            @if (auth()->user()->role === 'admin')
+                                <li class="nav-item">
+                                    <a href="{{ url('/admindashboard') }}" class="nav-link" id="loginbtn">
                                         DASHBOARD
-                                    </a></li>
-                                @else
-                                <li class="nav-item"><a
-                                        href="{{ route('login') }}"
-                                        class="nav-link"
-                                        id="loginbtn"
-                                    >
-                                        LOGIN
-                                    </a></li>
+                                    </a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a href="{{ url('/dashboard') }}" class="nav-link" id="loginbtn">
+                                        DASHBOARD
+                                    </a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ route('login') }}" class="nav-link" id="loginbtn">
+                                    LOGIN
+                                </a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a href="{{ route('register') }}" class="nav-link" id="registerbtn">
+                                        REGISTER
+                                    </a>
+                                </li>
+                            @endif
+                        @endauth
+                    @endif
 
-                                    @if (Route::has('register'))
-                                        <li class="nav-item"><a
-                                            href="{{ route('register') }}"
-                                            class="nav-link"
-                                            id="registerbtn"
-                                        >
-                                            REGISTER
-                                        </a></li>
-                                    @endif
-                                @endauth
-                        @endif   
                     </ul>
                 </div>
             </div>

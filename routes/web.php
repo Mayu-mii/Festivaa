@@ -6,6 +6,7 @@ use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventssController;
+use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
@@ -104,3 +105,11 @@ Route::delete('/deleteevent/{id}', [EventssController::class, 'destroy'])->name(
 
 Route::get('/dashboard', [EventssController::class, 'dashboard'])->name('dashboard');
 Route::put('/events/{id}/done', [EventssController::class, 'markAsDone'])->name('doneevent');
+
+//admin
+
+Route::get('/admineventapproval', [AdminController::class, 'admineventapproval'])->name('admineventapproval');
+Route::get('/admineventdetails/{id}', [AdminController::class, 'showEventDetails'])->name('admineventdetails');
+Route::post('/admineventdetails/{id}/{status}', [AdminController::class, 'updateStatus'])->name('updateeventstatus');
+Route::get('/admindashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
