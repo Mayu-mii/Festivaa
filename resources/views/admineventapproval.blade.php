@@ -54,15 +54,16 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label for="statusFilter" class="form-label fw-bold">Filter by Status:</label>
-                        <select id="statusFilter" class="form-select">
-                            <option value="All">All</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Approved">Approved</option>
-                            <option value="Rejected">Rejected</option>
-                        </select>
+                        <form method="GET" action="{{ route('admineventapproval') }}">
+                            <select id="statusFilter" name="status" class="form-select" onchange="this.form.submit()">
+                                <option value="All" {{ request('status') == 'All' ? 'selected' : '' }}>All</option>
+                                <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="Approved" {{ request('status') == 'Approved' ? 'selected' : '' }}>Approved</option>
+                                <option value="Rejected" {{ request('status') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
-
                 <!-- Table Section -->
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered">
@@ -117,10 +118,19 @@
                     <script src="assets/demo/chart-bar-demo.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
                     <script src="js/datatables-simple-demo.js"></script>
+
                 </body>
             </html>
 
     </div>
 </x-app-layout>
+
+
+
+
+
+
+
+
 
 

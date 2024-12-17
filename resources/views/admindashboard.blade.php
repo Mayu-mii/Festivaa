@@ -83,38 +83,97 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="card mb-4">
-                                                        <div class="card-header">
-                                                            <i class="fa-solid fa-chart-bar"></i>
-                                                            EVENTS STATISTICS
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="stats-info">
-                                                                        <h6>Total Events</h6>
-                                                                        <p>{{ $totalEvents }}</p>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="stats-info">
-                                                                        <h6>Upcoming Events</h6>
-                                                                        <p>{{ $upcomingEvents }}</p>
-                                                                        </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="stats-info">
-                                                                        <h6>Past Events</h6>
-                                                                        <p>{{ $pastEvents }}</p>
-                                                                        </div>
-                                                                </div>
+                                                    <!-- Pending Events Card (Moved to the bottom) -->
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    <i class="fa-solid fa-chart-bar"></i>
+                                                    Pending Events
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Event Title</th>
+                                                                <th scope="col">Event Date</th>
+                                                                <th scope="col">Location</th>
+                                                                <th scope="col">Status</th>
                                                                 
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($pendingEvents as $event)
+                                                            <tr>
+                                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                                <td>{{ $event->title }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d H:i') }}</td>
+                                                                <td>{{ $event->location }}</td>
+                                                                <td><span class="badge bg-warning">{{ $event->status }}</span></td>
+                                                            </tr>
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
+                                               
                                                     </div>
+                                                    </div>
+                                                    </div>
+                      
+                                                    <!-- Event Statistics Card (Moved to the bottom) -->
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card mb-4">
+                                                <div class="card-header">
+                                                    <i class="fa-solid fa-chart-bar"></i>
+                                                    Event Statistics
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                    <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Total Events</h6>
+                                                        <p>{{ $totalEvents }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Upcoming Events</h6>
+                                                        <p>{{ $upcomingEventCount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Pending Events</h6>
+                                                        <p>{{ $pendingEventCount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="stats-info">
+                                                        <h6>Approved Events</h6>
+                                                        <p>{{ $approvedEventCount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="stats-info">
+                                                        <h6>Rejected Events</h6>
+                                                        <p>{{ $rejectedEventCount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="stats-info">
+                                                        <h6>Past Events</h6>
+                                                        <p>{{ $pastEventCount }}</p>
+                                                    </div>
+                                                </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
                                                 </div>
                                             </div>
                                         </div>

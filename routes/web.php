@@ -144,5 +144,8 @@ Route::middleware('auth')->group(function () {
         abort(403, 'Unauthorized Access');
     })->name('updateeventstatus');
 
+    Route::get('/admineventapproval', [AdminController::class, 'admineventapproval'])->name('admineventapproval');
+
+
 
 });

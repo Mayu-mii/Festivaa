@@ -8,11 +8,21 @@ use App\Models\Event;
 class AdminController extends Controller
 {
     // Display all events for approval
-    public function admineventapproval()
-    {
-        $events = Event::all(); // Retrieve all events
-        return view('admineventapproval', compact('events'));
+    public function admineventapproval(Request $request)
+{
+    // Retrieve the status filter from the query parameters
+    $filter = $request->query('status');
+
+    // Fetch events based on the filter
+    if ($filter && in_array($filter, ['Pending', 'Approved', 'Rejected'])) {
+        $events = Event::where('status', $filter)->get();
+    } else {
+        $events = Event::all(); // Fetch all events if no filter is applied
     }
+
+    return view('admineventapproval', compact('events', 'filter'));
+}
+
     public function showEventDetails($id)
     {
         $event = Event::findOrFail($id); // Fetch the event by ID
@@ -35,13 +45,28 @@ class AdminController extends Controller
 {
     $events = Event::all(); // Fetch all events
     $totalEvents = Event::count();
-    $upcomingEvents = Event::where('event_date', '>=', now())->count();
-    $pastEvents = Event::where('event_date', '<', now())->count();
 
-    return view('admindashboard', compact('events', 'totalEvents', 'upcomingEvents', 'pastEvents'));
+    // Calculate counts for statistics
+    $upcomingEventCount = Event::where('event_date', '>=', now())->count();
+    $pendingEventCount = Event::where('status', 'Pending')->count();
+    $approvedEventCount = Event::where('status', 'Approved')->count();
+    $rejectedEventCount = Event::where('status', 'Rejected')->count();
+    $pastEventCount = Event::where('event_date', '<', now())->count();
+
+    // Fetch pending events
+    $pendingEvents = Event::where('status', 'Pending')->get();
+
+    // Pass all variables to the view
+    return view('admindashboard', compact(
+        'events', 
+        'totalEvents', 
+        'upcomingEventCount', 
+        'pendingEventCount', 
+        'approvedEventCount',
+        'rejectedEventCount',
+        'pastEventCount', 
+        'pendingEvents'
+    ));
 }
-
-
-
 
 }
