@@ -66,9 +66,9 @@
                                             @foreach($events as $event)
                                                 @if($event->status !== 'Done') <!-- Exclude "Done" events -->
                                                     <div class="card" style="width: 33%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                                        <img class="eventlistimage" 
-                                                            src="{{ $event->event_image ? asset('storage/events/' . $event->event_image) : asset('assets/img/default_event.png') }}" 
-                                                            alt="Event Image" style="width: 100%; height: auto;">
+                                                    <img class="eventlistimage" 
+                                                    src="{{ $event->event_image ? asset('storage/events/' . $event->event_image) : asset('assets/img/default_event.png') }}" 
+                                                    alt="Event Image" style="width: 100%; height: auto;">
 
                                                         <div class="card-body">
                                                             <h5 class="card-title">{{ $event->title }}</h5>

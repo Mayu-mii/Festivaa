@@ -31,33 +31,39 @@ class EventssController extends Controller
             'event_image' => 'nullable|image|max:2048',
             'organizer_contact' => 'required|string|max:255',
             'visibility' => 'required|in:Public,Private',
-            'additional_notes' => 'nullable|string',
+            'additional_notes' => 'nullable|string', // Make "additional_notes" optional
         ]);
+        
     
+        
         // Handle file upload
         $fileName = null;
         if ($request->hasFile('event_image')) {
             $fileName = time() . '.' . $request->event_image->extension();
             $request->event_image->storeAs('public/events', $fileName);
         }
-    
-        // Create a new Event instance
-        $event = new Event();
-        $event->user_id = auth()->id(); // Ensure the logged-in user's ID is saved
-        $event->title = $request->title;
-        $event->description = $request->description;
-        $event->event_date = $request->event_date;
-        $event->location = $request->location;
-        $event->category = $request->category;
-        $event->capacity = $request->capacity;
-        $event->ticket_price = $request->ticket_price;
-        $event->rsvp_deadline = $request->rsvp_deadline;
-        $event->organizer_contact = $request->organizer_contact;
-        $event->visibility = $request->visibility;
-        $event->additional_notes = $request->additional_notes;
-        $event->event_image = $fileName;
 
-    
+
+            // Create a new Event instance
+            $event = new Event();
+            $event->user_id = auth()->id();
+            $event->title = $request->title;
+            $event->description = $request->description;
+            $event->event_date = $request->event_date;
+            $event->location = $request->location;
+            $event->category = $request->category;
+            $event->capacity = $request->capacity;
+            $event->ticket_price = $request->ticket_price;
+            $event->rsvp_deadline = $request->rsvp_deadline;
+            $event->organizer_contact = $request->organizer_contact;
+            $event->visibility = $request->visibility;
+            $event->additional_notes = $request->additional_notes;
+            $event->event_image = $fileName;
+
+            $event->save();
+
+        $event->user_id = auth()->id();
+
         // Save the event
         $event->save();
         $event->status = 'Done';
