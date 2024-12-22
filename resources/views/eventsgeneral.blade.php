@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Festiva | Events</title>
+        <title>Festiva | Home</title>
         <link rel="icon" type="image/x-icon" href="logo.png" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -66,7 +66,7 @@
                                     <p class="card-text">{{ Str::limit($event->description, 100) }}</p>
                                     <p class="text-muted">Date: {{ \Carbon\Carbon::parse($event->event_date)->format('F j, Y, g:i a') }}</p>
                                     <p class="text-muted">Location: {{ $event->location }}</p>
-                                    <a href="{{ route('organizereventdetails', $event->id) }}" class="btn btn-primary">SEE DETAILS</a>
+                                    <a href="{{ route('usereventdetails', $event->id) }}" class="btn btn-primary">SEE DETAILS</a>
                                 </div>
                             </div>
                         </div>

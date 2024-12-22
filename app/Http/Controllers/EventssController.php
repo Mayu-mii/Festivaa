@@ -215,6 +215,10 @@ public function eventsgeneral()
     return view('eventsgeneral', compact('events'));
 }
 
-
+public function showPublicEvent($id)
+{
+    $event = Event::findOrFail($id);
+    return view('usereventdetails', compact('event'));
+}
     
 }    

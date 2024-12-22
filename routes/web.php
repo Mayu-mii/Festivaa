@@ -32,15 +32,13 @@ Route::get('/faqs', function () {
 
 // Publicly accessible eventsgeneral route (no authentication required)
 Route::get('/eventsgeneral', [EventssController::class, 'eventsgeneral'])->name('eventsgeneral');
+// Route::get('/usereventdetails/{id}', action: [EventssController::class, 'showPublicEvent'])->name('usereventdetails');
+Route::get('/usereventdetails/{id}', [EventssController::class, 'showPublicEvent'])->name('usereventdetails');
 
+// Route::get('/usereventdetails', function () {
+//     return view('usereventdetails');
+// })->name('usereventdetails');
 
-Route::get('/usereventdetails', function () {
-    return view('usereventdetails');
-})->name('usereventdetails');
-
-
-
-//
 
 Route::middleware([
     'auth:sanctum',
