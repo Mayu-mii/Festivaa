@@ -30,9 +30,8 @@ Route::get('/eventsgeneral', function () {
     return view('eventsgeneral');
 })->name('eventsgeneral');
 
-Route::get('/usereventdetails', function () {
-    return view('usereventdetails');
-})->name('usereventdetails');
+Route::get('/usereventdetails/{id}', [EventssController::class, 'showPublicEvent'])->name('usereventdetails');
+
 
 Route::middleware([
     'auth:sanctum',

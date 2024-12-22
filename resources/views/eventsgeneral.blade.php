@@ -77,12 +77,28 @@
         <section id="scroll">
             <div class="container px-5" style="padding: 50px;">
                 <div class="row gx-5 align-items-center">
+<<<<<<< Updated upstream
                     <div class="card" style="width: 31%; margin:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <img class="card-img-top" src="assets/img/event1.png" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">EVENT</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             <a href="{{ route('usereventdetails') }}"  class="btn" id="registerbtn" style="margin-left:0;">SEE DETAILS</a>
+=======
+                    @foreach($events as $event)
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                <!-- Display Event Image -->
+                                <img class="card-img-top" src="{{ asset('storage/events/' . $event->event_image) }}" alt="Event Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $event->title }}</h5>
+                                    <p class="card-text">{{ Str::limit($event->description, 100) }}</p>
+                                    <p class="text-muted">Date: {{ \Carbon\Carbon::parse($event->event_date)->format('F j, Y, g:i a') }}</p>
+                                    <p class="text-muted">Location: {{ $event->location }}</p>
+                                    <a href="{{ route('usereventdetails', $event->id) }}" class="btn btn-primary">SEE DETAILS</a>
+                                </div>
+                            </div>
+>>>>>>> Stashed changes
                         </div>
                     </div>
                 </div>
