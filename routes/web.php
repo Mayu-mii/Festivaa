@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\EventssController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailingListController;
 
 
 // Routes that are accessible without authentication
@@ -65,9 +66,9 @@ Route::middleware([
         return view('organizereventdetails');
     })->name('organizereventdetails');
 
-    Route::get('/mailinglist', function () {
-        return view('mailinglist');
-    })->name('mailinglist');
+    Route::get('/mailinglist', [MailingListController::class, 'index'])->name('mailinglist');
+
+    
 
     Route::get('/admindashboard', function () {
         return view('admindashboard');
@@ -93,6 +94,8 @@ Route::middleware([
     Route::get('/editblog/{id}', [UserController::class, 'editBlog'])->name('editBlog');
     Route::put('/updateblog/{id}', [UserController::class, 'updateBlog'])->name('updateBlog');
 });
+
+Route::post('/mailinglist', [MailingListController::class, 'store'])->name('mailinglist.store');
 
 //events
 Route::middleware(['auth', UserMiddleware::class])->group(function () {

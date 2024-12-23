@@ -82,41 +82,28 @@
                                                 Mailing List Table
                                             </div>
                                             <div class="card-body">
-                                                <table class="table table-striped table-hover" id="mailingListTable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Event Title</th>
-                                                            <th>Name</th>
-                                                            <th>Email</th>
-                                                            <th>Contact Information</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Static Data Rows -->
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Event 1</td>
-                                                            <td>John Doe</td>
-                                                            <td>john.doe@example.com</td>
-                                                            <td>+123456789</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Event 2</td>
-                                                            <td>Jane Smith</td>
-                                                            <td>jane.smith@example.com</td>
-                                                            <td>+987654321</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Event 3</td>
-                                                            <td>Michael Johnson</td>
-                                                            <td>michael.johnson@example.com</td>
-                                                            <td>+112233445</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <table class="table table-striped table-hover" id="mailingListTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Event Title</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($mailingLists as $mailingList)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $mailingList->event ? $mailingList->event->title : 'N/A' }}</td> <!-- Check if event exists -->
+                <td>{{ $mailingList->name }}</td>
+                <td>{{ $mailingList->email }}</td>
+                <td>{{ $mailingList->contact_number }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
                                             </div>
                                         </div>
                                     </div>

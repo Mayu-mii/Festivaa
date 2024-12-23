@@ -131,21 +131,40 @@
                             <div class="card-body text-center">
                                 <h3 class="fw-bold" style="color: #b23d26;">Interested?</h3>
                                 <p class="text-muted">Fill up the form to get full details of the event.</p>
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label fw-bold">Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label fw-bold">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="contact" class="form-label fw-bold">Contact Number</label>
-                                        <input type="text" class="form-control" id="contact" placeholder="Enter your contact number" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-success px-4 py-2" style="border-radius: 30px;">Submit</button>
-                                </form>
+                                <form action="{{ route('mailinglist.store') }}" method="POST">
+    @csrf
+    <input type="hidden" name="event_id" value="{{ $event->id }}">
+    <div class="mb-3">
+        <label for="name" class="form-label fw-bold">Name</label>
+        <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label fw-bold">Email</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+    </div>
+    <div class="mb-3">
+        <label for="contact" class="form-label fw-bold">Contact Number</label>
+        <input type="text" name="contact_number" class="form-control" id="contact" placeholder="Enter your contact number" required>
+    </div>
+    <button type="submit" class="btn btn-success px-4 py-2" style="border-radius: 30px;">Submit</button>
+</form>
+
+@if (session('success'))
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
+@endif
+
+<div id="successMessage" class="alert alert-success mt-3" style="display: none;"></div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                             </div>
                         </div>
                     </div>
@@ -161,5 +180,34 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#mailingListForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(), // Serialize the form data
+            success: function(response) {
+                // Show success message
+                $('#successMessage').text('Your details have been saved successfully!').show();
+                // Optionally, clear the form fields
+                $('#mailingListForm')[0].reset();
+            },
+            error: function(xhr) {
+                // Handle errors here
+                var errors = xhr.responseJSON.errors;
+                var errorMessage = '';
+                for (var key in errors) {
+                    errorMessage += errors[key][0] + '<br>';
+                }
+                $('#successMessage').html(errorMessage).removeClass('alert-success').addClass('alert-danger').show();
+            }
+        });
+    });
+});
+</script>
     </body>
 </html>
