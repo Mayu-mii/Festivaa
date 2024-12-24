@@ -60,20 +60,6 @@
                         <main>
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4" style="color: #b23d26; font-weight: bold;">Mailing List</h1>
-
-                                <!-- Filter Section -->
-                                <div class="row mt-4">
-                                    <div class="col-md-6">
-                                        <label for="eventFilter" class="form-label">Filter by Event Title:</label>
-                                        <select id="eventFilter" class="form-select">
-                                            <option value="">All Events</option>
-                                            <option value="Event 1">Event 1</option>
-                                            <option value="Event 2">Event 2</option>
-                                            <option value="Event 3">Event 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-
                                 <!-- Mailing List Table -->
                                 <div class="row mt-4">
                                     <div class="col-md-12">

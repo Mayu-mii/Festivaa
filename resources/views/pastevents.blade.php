@@ -7,7 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg" style="    
+            margin-top: 2%;
+            height: 296px;
+            margin-bottom: 2%;">
                 <div class="container-fluid px-4">
                     <div class="row" style="margin-top: 35px;">
                         @foreach($events as $event)

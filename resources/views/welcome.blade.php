@@ -69,7 +69,7 @@
                 <div class="" >
                     <h1 class="masthead-heading mb-0">Make Every Moment</h1>
                     <h1 class="masthead-heading mb-0">a Festiva! :)</h1>
-                    <a class="btn btn-xl rounded-pill mt-5" href="#scroll">SEE EVENTS</a>
+                    <a class="btn btn-xl rounded-pill mt-5" href="#scroll">SEE MORE</a>
                 </div>
             </div>
             <div class="bg-circle-1 bg-circle"></div>

@@ -158,9 +158,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-10">
-                                                        <button type="submit" class="btn btn-success">Create Event</button>
+                                                <div class="form-group row"     style="width: 100%;">
+                                                    <div class="col-sm-10"   style="width: 100%;">
+                                                        <button type="submit" class="btn btn-success"   style="margin-left:81%;">Create Event</button>
                                                     </div>
                                                 </div>
                                             </form>

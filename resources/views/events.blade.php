@@ -28,7 +28,7 @@
                         <div id="layoutSidenav_nav">
                             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                                 <div class="sb-sidenav-menu" style="background-color: #b23d26;">
-                                    <div class="nav">
+                                    <div class="nav" style="padding-bottom: 60%;;">
                                         <div class="sb-sidenav-menu-heading">- General -</div>
                                         <a class="nav-link" href="{{route('dashboard')}}">
                                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -60,7 +60,7 @@
 
                             <div class="py-12">
                                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                    
                                         <div class="container-fluid px-4">
                                         <div class="row" style="margin-top: 35px;">
                                             @foreach($events as $event)
@@ -105,7 +105,7 @@
 
 
                                         </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </x-app-layout>

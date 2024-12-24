@@ -29,38 +29,20 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('faqs')}}">FAQs</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('about')}}">ABOUT</a></li>
                         @if (Route::has('login'))
-                                @auth
-                                <li class="nav-item"><a
-                                        href="{{ url('/dashboard') }}"
-                                        class="nav-link"
-                                        id="loginbtn"
-                                    >
-                                        DASHBOARD
-                                    </a></li>
-                                @else
-                                <li class="nav-item"><a
-                                        href="{{ route('login') }}"
-                                        class="nav-link"
-                                        id="loginbtn"
-                                    >
-                                        LOGIN
-                                    </a></li>
-
-                                    @if (Route::has('register'))
-                                        <li class="nav-item"><a
-                                            href="{{ route('register') }}"
-                                            class="nav-link"
-                                            id="registerbtn"
-                                        >
-                                            REGISTER
-                                        </a></li>
-                                    @endif
-                                @endauth
+                            @auth
+                            <li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link" id="loginbtn">DASHBOARD</a></li>
+                            @else
+                            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link" id="loginbtn">LOGIN</a></li>
+                            @if (Route::has('register'))
+                                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link" id="registerbtn">REGISTER</a></li>
+                            @endif
+                            @endauth
                         @endif   
                     </ul>
                 </div>
             </div>
         </nav>
+
         <!-- Header-->
         <header class="masthead text-center text-white" style="height:100px;">
             <div class="masthead-content">
@@ -73,102 +55,115 @@
             <div class="bg-circle-3 bg-circle"></div>
             <div class="bg-circle-4 bg-circle"></div>
         </header>
-        <section class="py-5">
-	<div class="container">
-		<div class="row align-items-center gx-4">
-			<div class="col-md-5">
-				<div class="ms-md-2 ms-lg-5"><img class="img-fluid rounded-3" src="assets/img/01.png"></div>
-			</div>
-			<div class="col-md-6 offset-md-1">
-				<div class="ms-md-2 ms-lg-5">
-                    <img class="festivaLogo" src="festivaLogo.png" alt="Image" style="width: 50%;"><br>
-					<span class="text-muted">Our Story</span>
-					<p class="lead">At Festiva, we believe that every event, big or small, is an opportunity to create lasting memories. Our journey began with a simple idea: to make event planning accessible, seamless, and enjoyable for everyone. From weddings to corporate conferences, we wanted to empower individuals and businesses to bring their visions to life without the stress. With a passion for innovation and a commitment to excellence, Festiva has grown into a trusted platform that helps people celebrate life’s moments with ease. Today, we continue to strive for perfection, ensuring that every detail of your event is taken care of, so you can focus on what truly matters—making memories.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 
-<!-- Content section 1-->
-<section id="about">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/picute.jpg" alt="Lourdes Ashley Santos" /></div>
+        <!-- Our Story Section-->
+        <section class="py-5">
+            <div class="container">
+                <div class="row align-items-center gx-4">
+                    <div class="col-md-5">
+                        <div class="ms-md-2 ms-lg-5"><img class="img-fluid rounded-3" src="assets/img/01.png" alt="Festiva Overview"></div>
                     </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <p>Founded by Lourdes Ashley Santos, our CEO and visionary, Festiva is dedicated to making your event dreams a reality.</p>
-                            <p>Lourdes Ashley Santos, a seasoned event planner and entrepreneur, saw an opportunity to revolutionize the event industry. With years of experience in planning and executing flawless events, Lourdes created Festiva to provide a comprehensive platform for event organizers and attendees alike.</p>
-                            <p>At Festiva, we believe that every event should be a unique and unforgettable experience. Our platform is designed to simplify the planning process, providing you with the tools and resources you need to bring your vision to life. From intimate gatherings to grand celebrations, we're committed to helping you create memories that last a lifetime.</p>
+                    <div class="col-md-6 offset-md-1">
+                        <div class="ms-md-2 ms-lg-5">
+                            <img class="festivaLogo" src="festivaLogo.png" alt="Image" style="width: 50%;"><br>
+                            <span class="text-muted">Our Story</span>
+                            <p class="lead">At Festiva, we believe that every event, big or small, is an opportunity to create lasting memories. Our journey began with a simple idea: to make event planning accessible, seamless, and enjoyable for everyone. From weddings to corporate conferences, we wanted to empower individuals and businesses to bring their visions to life without the stress. With a passion for innovation and a commitment to excellence, Festiva has grown into a trusted platform that helps people celebrate life’s moments with ease. Today, we continue to strive for perfection, ensuring that every detail of your event is taken care of, so you can focus on what truly matters—making memories.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-<section class="py-5">
-	<div class="container">
-		<div class="row justify-content-center text-center mb-3">
-			<div class="col-lg-8 col-xxl-7">
-				<span class="text-muted">Let's Talk</span>
-				<h2 class="display-5 fw-bold mb-3">Contact Us</h2>
-				<p class="lead">Lorem ipsum dolor, sit amet elit Quamnitm veniam dicta, quos nemo minima nulla ducimus officii nulla ducimus officiis! Lorem ipsum dolor, sit amet elit Quamnitm.</p>
-			</div>
-		</div>
-		<div class="row justify-content-between">
-			<div class="col-lg-6">
-				<h5 class="fw-semibold mb-3" style="margin-left:50px;">Send us a message</h5>
-				<form style="margin-left:50px;">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="mb-3">
-								<input class="form-control bg-light" placeholder="First name" type="text">
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="mb-3">
-								<input class="form-control bg-light" placeholder="Last name" type="text">
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="mb-3">
-								<input class="form-control bg-light" placeholder="Email address" type="text">
-							</div>
-						</div>
-					</div>
-					<div class="mb-3">
-						<textarea class="form-control bg-light" placeholder="Your message" rows="4"></textarea>
-					</div>
-					<div class="col-md-4 ms-auto">
-						<div class="d-grid">
-							<button class="btn" type="submit" id="registerbtn">Send message</button>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="col-lg-5 mt-5 mt-lg-0">
-				<div class="mb-4">
-					<h5>Address</h5>
-					<p>123 Mountain View, California, United States.</p>
-				</div>
-				<div class="mb-4">
-					<h5>Phone</h5>
-					<p>+1 123-456-7890</p>
-				</div>
-				<div class="mb-4">
-					<h5>Email</h5>
-					<p>hello@yourdomain.com</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+        <!-- Meet the Founders Section-->
+        <section id="about">
+            <div class="container px-5">
+                <h2 class="text-center mb-5">Meet the Founders</h2>
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-3 mb-4">
+                        <div class="text-center">
+                            <img class="img-fluid rounded-circle mb-3" src="goldie.jpg" alt="Founder 1" />
+                            <h5 class="fw-bold">Pare, Goldie May M.</h5>
+                            <p class="text-muted">Founder & Developer</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mb-4">
+                        <div class="text-center">
+                            <img class="img-fluid rounded-circle mb-3" src="dom.jpg" alt="Founder 2" />
+                            <h5 class="fw-bold">Raminto, Jabriel Dominic S. </h5>
+                            <p class="text-muted">Founder & Developer</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mb-4">
+                        <div class="text-center">
+                            <img class="img-fluid rounded-circle mb-3" src="aly.jpg" alt="Founder 3" />
+                            <h5 class="fw-bold">Romen, Alyssa Marie R.</h5>
+                            <p class="text-muted">Founder & Developer</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mb-4">
+                        <div class="text-center">
+                            <img class="img-fluid rounded-circle mb-3" src="ashley.jpg" alt="Founder 4" />
+                            <h5 class="fw-bold">Santos, Lourdes Ashley L.</h5>
+                            <p class="text-muted">Founder & Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Mission Section -->
+        <section class="bg-light py-5">
+            <div class="container px-5">
+                <h2 class="text-center mb-5">Our Mission</h2>
+                <p class="lead text-center">At Festiva, our mission is to simplify event planning for individuals and businesses by providing a comprehensive and user-friendly platform. We aim to bring people together, foster creativity, and turn every event into a memorable celebration. Our goal is to offer seamless solutions for planning events of all sizes, from small gatherings to large conferences, all while maintaining exceptional customer service and attention to detail.</p>
+            </div>
+        </section>
+
+        <!-- Our Values Section -->
+        <section class="py-5">
+            <div class="container px-5">
+                <h2 class="text-center mb-5">Our Values</h2>
+                <div class="row gx-5">
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <i class="fas fa-heart fa-3x mb-3"></i>
+                            <h5 class="fw-bold">Passion</h5>
+                            <p>We are passionate about creating unforgettable experiences and ensuring every event we plan is a success.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <i class="fas fa-cogs fa-3x mb-3"></i>
+                            <h5 class="fw-bold">Innovation</h5>
+                            <p>We continuously strive for innovation, embracing new technologies and creative ideas to improve the event experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <i class="fas fa-users fa-3x mb-3"></i>
+                            <h5 class="fw-bold">Community</h5>
+                            <p>We believe in fostering a strong sense of community, both with our clients and within our team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="" style="background-color: #f3be66; padding:5%;;">
+            <div class="container px-5">
+                <h2 class="text-center mb-5">Why Choose Festiva?</h2>
+                <p class="lead text-center">Choosing Festiva means choosing a team that understands your needs and strives to deliver nothing less than perfection. We are committed to making event planning easier, faster, and more enjoyable, ensuring your special day is exactly as you envision it. With our personalized services, expert guidance, and cutting-edge technology, you can trust us to create lasting memories that you and your guests will cherish forever.</p>
+            </div>
+        </section>
+
         <!-- Footer-->
         <footer class="py-5 bg-black">
-            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p></div>
+            <div class="container px-5">
+                <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p>
+            </div>
         </footer>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
